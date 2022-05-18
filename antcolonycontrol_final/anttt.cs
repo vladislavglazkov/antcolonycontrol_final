@@ -31,7 +31,7 @@ namespace AntAlgo {
 		double angledev;
 		double radius;
 		List<BlockInfo> infos;
-		const int xmax = 10, ymax = 10;
+		int xmax = GlobalConstraints.XSize, ymax = GlobalConstraints.YSize;
 		DecisionMake decisionmaker = null;
 		Map map;
 		EventsCallback callback;
@@ -196,7 +196,7 @@ namespace AntAlgo {
 			}
 			Console.Write("\n\n\n\n");
 		}
-		public void Init(double x, double y, double v, double viewAngle, double radius, Map _map, DecisionMake dm,EventsCallback callback)
+		public void Init(double x, double y, double v, double viewAngle, double radius, Map _map, DecisionMake dm,EventsCallback callback,int id)
 		{
 			this.x = x;
 			this.y = y;
@@ -206,7 +206,7 @@ namespace AntAlgo {
 			this.angledev = viewAngle;
 			this.radius = radius;
 			this.callback = callback;
-			this.id = new Random().Next();
+			this.id = id;
  
 		}
 

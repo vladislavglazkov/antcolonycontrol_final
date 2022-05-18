@@ -69,14 +69,14 @@ namespace WPF_TEST
             Ant nw = new Ant();
             DecisionMakeStandard dm = new DecisionMakeStandard();
 
-            nw.Init(0, 0, 1, Math.PI / 2, 5, map, dm, cb);
+            nw.Init(0, 0, 1, Math.PI / 2, 5, map, dm, cb,new Random().Next());
             colony.Add(nw);
             Console.WriteLine(nw.id);
 
             var rev = new Ant();
             DecisionMakeStandard dm2 = new DecisionMakeStandard();
             dm2.state = 1;
-            rev.Init(9.9, 9.9, 1, Math.PI / 2, 5, map, dm2, cb);
+            rev.Init(9.9, 9.9, 1, Math.PI / 2, 5, map, dm2, cb, new Random().Next());
             rev.angle = Math.PI;
             Console.WriteLine(rev.id);
 

@@ -9,7 +9,7 @@ namespace AntAlgo
         public double dist;
         public int type;
         public double angle;
-        public int[] props = new int[1000];
+        public int[] props = new int[GlobalConstraints.PropsSize];
         public void Init(double _dist, double _angle, int _type, int[] a)
         {
             this.dist = _dist;
@@ -21,11 +21,12 @@ namespace AntAlgo
     
     public class Map
     {
+        readonly int temp = GlobalConstraints.PropsSize;
         const int pnum = 10;
 
         static void Main(string[] args) { }
         public int xsz, ysz;
-        public int[,,] vals = new int[pnum, 650, 370];
+        public int[,,] vals = new int[pnum, GlobalConstraints.XSize, GlobalConstraints.YSize];
 
         public void Init(int xsz1, int ysz1, int types)
         {
