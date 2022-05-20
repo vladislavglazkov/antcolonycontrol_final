@@ -17,8 +17,13 @@ namespace AntAlgo {
 				if (h.type != 1)
 				{
 					double val = 1 / (time - h.props[2 * (state ^ 1) + 1]) / h.dist;
+					if (state == 0 && h.type == 2 || state == 1 && h.type == 3)
+                    {
+						val *= 1000;
+                    }
 					sum += val;
 				}
+				
 			}
 			Random random = new Random();
 			double rand = random.NextDouble()*sum;
@@ -33,6 +38,10 @@ namespace AntAlgo {
 			{
 				BlockInfo h = blocks[i];
 				double val = 1 / (time - h.props[2 * (state^1) + 1]) /*/ h.dist*/;
+				if (state == 0 && h.type == 2 || state == 1 && h.type == 3)
+				{
+					val *= 1000;
+				}
 				if (h.type != 1)
 				{
 					if (cursum < rand)
@@ -46,8 +55,8 @@ namespace AntAlgo {
 		}
 		public int[] PropsUpdate(double time, BlockInfo currentBlock, BlockInfo newBlock, List<BlockInfo> blocks)
 		{
-			int[] ans = new int[9];
-			for (int i = 0; i < 9; i++)
+			int[] ans = new int[4];
+			for (int i = 0; i < 4; i++)
             {
 				ans[i] = currentBlock.props[i];
 			}

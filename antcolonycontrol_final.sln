@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "antcolonycontrol_final", "a
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPF_TEST", "WPF_TEST\WPF_TEST.csproj", "{B9FC9AC3-7FA1-40A4-8C96-2129E196AA0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dll1", "Dll1\Dll1.csproj", "{A13E3C0F-D819-4EB6-B485-C353EA9F07CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dll1", "Dll1\Dll1.csproj", "{A13E3C0F-D819-4EB6-B485-C353EA9F07CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Constr", "Constr\Constr.csproj", "{753C9E82-EC10-4CEA-A95D-B1BE40599419}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Constr", "Constr\Constr.csproj", "{753C9E82-EC10-4CEA-A95D-B1BE40599419}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StressTest", "StressTest\StressTest.csproj", "{330725C7-2C2A-4482-83D7-8A51723B535F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{753C9E82-EC10-4CEA-A95D-B1BE40599419}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{753C9E82-EC10-4CEA-A95D-B1BE40599419}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{753C9E82-EC10-4CEA-A95D-B1BE40599419}.Release|Any CPU.Build.0 = Release|Any CPU
+		{330725C7-2C2A-4482-83D7-8A51723B535F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{330725C7-2C2A-4482-83D7-8A51723B535F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{330725C7-2C2A-4482-83D7-8A51723B535F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{330725C7-2C2A-4482-83D7-8A51723B535F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

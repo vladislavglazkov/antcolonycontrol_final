@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WPF_TEST"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid x:Name="grid" Height="431" Width="431">
+    <Grid x:Name="grid">
         <Canvas x:Name="canvas" Grid.RowSpan="10" Grid.ColumnSpan="10"/>
 
 

@@ -22,7 +22,7 @@ namespace AntAlgo
     public class Map
     {
         readonly int temp = GlobalConstraints.PropsSize;
-        const int pnum = 10;
+        const int pnum = 5;
 
         static void Main(string[] args) { }
         public int xsz, ysz;

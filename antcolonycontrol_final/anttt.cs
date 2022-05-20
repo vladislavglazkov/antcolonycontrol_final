@@ -82,7 +82,7 @@ namespace AntAlgo {
         }
 		public void UpdateInfos()
 		{
-			Console.Write("UpdateInfosSession\n");
+			//Console.Write("UpdateInfosSession\n");
 			infos = new List<BlockInfo>();
 			int id = 0;
 			double yy = this.y - this.radius;
@@ -99,44 +99,45 @@ namespace AntAlgo {
 			{
 				int L = -1;
 				int R = (int)this.x;
-				while (R - L > 1)
-				{
-					int med = (L + R) / 2;
-					double xc = med + 0.5;
-					double yc = yval + 0.5;
-					double yd = yc - this.y;
-
-					double xd = xc - this.x;
-					if (xd * xd + yd * yd <= this.radius*this.radius)
-					{
-						R = med;
-					}
-					else
-					{
-						L = med;
-					}
-				}
+				
 				int lblock = R;
 				L = (int)this.x;
 				R = xmax;
-				while (R - L > 1)
-				{
-					int med = (L + R) / 2;
-					double xc = med + 0.5;
-					double yc = yval + 0.5;
-					double yd = yc - y;
+				int rblock = (int)x-1;
+				lblock=(int)x;
+				for (int i = (int)x; i < xmax; i++)
+                {
+					double xc = 0.5 + i;
+					double yc = 0.5 + yval;
+					double xd = x - xc;
+					double yd = y - y;
 
-					double xd = xc - x;
+					if (xd * xd + yd * yd <= radius * radius)
+                    {
+						rblock = i;
+                    }
+                    else
+                    {
+						break;
+                    }
+                }
+				for (int i = (int)x; i >=0 ; i--)
+				{
+					double xc = 0.5 + i;
+					double yc = 0.5 + yval;
+					double xd = x - xc;
+					double yd = y - y;
+
 					if (xd * xd + yd * yd <= radius * radius)
 					{
-						L = med;
+						lblock = i;
 					}
-					else
-					{
-						R = med;
-					}
+                    else
+                    {
+						break;
+                    }
 				}
-				int rblock = L;
+
 
 				for (int i = lblock; i <= rblock; i++)
 				{
@@ -165,6 +166,10 @@ namespace AntAlgo {
 							double cy = y;
 							while (true)
                             {
+								if ((int)cx < 0)
+                                {
+									continue;
+                                }
 								if (map.Get(0, (int)cx, (int)cy) == 1)
                                 {
 									ok = false;
@@ -174,7 +179,7 @@ namespace AntAlgo {
                                 {
 									break;
                                 }
-								double timadd = TimeTo(cx,cy,angle);
+								double timadd = TillNext(cx,cy,angle);
 								cx += timadd * v * Math.Cos(angle);
 								cy += timadd * v * Math.Sin(angle);
 
@@ -183,7 +188,8 @@ namespace AntAlgo {
 
 							if (ok)
 							{
-								Console.WriteLine($"Added for {id} at {yval} {i}");
+								//GlobalConstraints.Steps++;
+								//Console.WriteLine($"Added for {id} at {yval} {i}");
 								BlockInfo info = new BlockInfo();
 								info.Init(Math.Sqrt(xd * xd + yd * yd), angle, map.Get(0, (int)i, (int)yval), map.GetAll((int)i, (int)yval)); ;
 								infos.Add((info));
@@ -194,7 +200,7 @@ namespace AntAlgo {
 					
 				}
 			}
-			Console.Write("\n\n\n\n");
+			//Console.Write("\n\n\n\n");
 		}
 		public void Init(double x, double y, double v, double viewAngle, double radius, Map _map, DecisionMake dm,EventsCallback callback,int id)
 		{
@@ -243,7 +249,7 @@ namespace AntAlgo {
 				callback.Handle(this.updtime, this, nval);
 			}
 			this.angle = decisionmaker.GetAngle(this.angle,this.updtime, nxt, infos);
-			this.updtime = this.time + this.TimePredict();
+			this.updtime = this.time + this.TillNext();
 
 		}
 		public Pair<double,double> GetRealPos()
@@ -265,8 +271,49 @@ namespace AntAlgo {
 			a.Second = (int)this.y;
 			return a;
 		}
+		private double TillNext()
+        {
+			return TillNext(this.x, this.y, this.angle);
+		}
+		private double TillNext(double x,double y,double angle)
+		{
+			double xv = v * Math.Cos(angle);
+			double yv = v * Math.Sin(angle);
+			double xt = 0, yt = 0;
+			const double eps = 0.00001;
+			if (xv > 0)
+			{
+				double nx = (int)x + 1;
+				xt = (nx - x) / xv + eps;
+			}
+			else
+			{
+				double nx = (int)x;
+				xt = (nx - x) / xv + eps;
+			}
+			if (yv > 0)
+			{
+				double ny = (int)y + 1;
+				yt = (ny - y) / yv + eps;
+			}
+			else
+			{
+				double ny = (int)y;
+				yt = (ny - y) / yv + eps;
+			}
+			if (Math.Abs(yv) < eps)
+            {
+				return xt;
+            }
+            else if (Math.Abs(xv)<eps)
+            {
+				return yt;
+            }
+			return Math.Min(xt,yt);
+		}
 
-        public int CompareTo(object? obj)
+
+		public int CompareTo(object? obj)
         {
 			Ant obj2 = (Ant)obj;
 			if (updtime == obj2.updtime)
